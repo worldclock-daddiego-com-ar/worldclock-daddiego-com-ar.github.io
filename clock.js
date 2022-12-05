@@ -14,20 +14,22 @@ const timezones = [
     ['Australia/Sydney', 'AEST']
 ]
 
-function showDateIn(timezone) {
-    return new Date().toLocaleString('es-AR', {'timeZone': timezone})
+function showDateIn(date, timezone) {
+    return date.toLocaleString('es-AR', {'timeZone': timezone});
 }
 
 function showTimes(){
-    clockwall.innerText = ''
+    const date = new Date();
+    let zone, name;
+    clockwall.innerText = '';
     timezones.forEach(timezone => {
-        let [zone, name] = timezone;
-        clockwall.append(showDateIn(zone) + ' ' + zone + ' (' + name + ')' + '\n');
+        [zone, name] = timezone;
+        clockwall.append(showDateIn(date, zone) + ' ' + zone + ' (' + name + ')' + '\n');
     });
 }
 
 showTimes();
 
 setInterval(function(){
-    showTimes()
+    showTimes();
 }, 30000)
